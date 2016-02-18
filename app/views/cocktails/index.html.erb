@@ -1,0 +1,38 @@
+<h1>Cocktails</h1>
+
+<ul>
+<% @cocktails.each do |cocktail| %>
+  <li>
+    <%= link_to cocktail.name, '#', data: { toggle: "modal", target: "#cocktail-#{cocktail.id}"} %>
+
+    <!-- <button type="button" class="btn btn-primary"
+      data-toggle= "modal" data-target="#cocktail-<%= cocktail.id %>">
+      Details
+    </button> -->
+
+    <div class="modal fade" id="cocktail-<%= cocktail.id %>">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"><%= cocktail.name %></h4>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <% cocktail.doses.each do |dose| %>
+              <li><%= dose.description %> <%= dose.ingredient.name %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+  </li>
+<% end %>
+</ul>
+
+<%= link_to "New cocktail", new_cocktail_path %>
